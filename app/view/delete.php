@@ -1,5 +1,5 @@
 <?php
-include_once 'Pengguna.php';
+include_once ('../object/Pengguna.php');
 
 $database = new Database();
 $db = $database->getConnection();

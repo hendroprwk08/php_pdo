@@ -10,7 +10,7 @@
 <body>
     <div style="margin-bottom:30px"><a href="index.php">&larr; Kembali</a></div>
     <?php
-    include_once("Pengguna.php");
+    include_once("../object/Pengguna.php");
 
     $database = new Database();
     $db = $database->getConnection();

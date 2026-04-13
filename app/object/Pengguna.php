@@ -1,5 +1,5 @@
 <?php
-include_once("Database.php");
+include_once("../db/Database.php");
 
 class Pengguna {
     private $conn;
@@ -45,13 +45,12 @@ class Pengguna {
 
     // Menampilkan 1 data berdasarkan id
     function show(){
-        $query = "SELECT idpengguna, nama, surel, sandi FROM " . 
-                    $this->table_name . " where idpengguna = ". 
-                    $this->idpengguna;
-        
+        $query = "SELECT idpengguna, nama, surel, sandi FROM " . $this->table_name . " WHERE idpengguna = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute();
         
+        $stmt->bindParam(":id", $this->idpengguna);
+        $stmt->execute();
+            
         return $stmt;
     }
 

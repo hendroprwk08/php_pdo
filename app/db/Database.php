@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $username = "root"; // ganti dengan username database Anda
-    private $password = ""; // ganti dengan password database Anda
-    private $database = "db_commerce"; // ganti dengan nama database Anda
+    private $username = "root"; 
+    private $password = ""; 
+    private $database = "db_pengguna"; 
     private $conn;
 
     public function __construct() {

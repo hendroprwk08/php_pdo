@@ -12,7 +12,7 @@
     <?php
     # menangkap respon dari method="post"
     if ($_SERVER['REQUEST_METHOD'] == "POST") { # jika ditekan submit
-        include_once("Pengguna.php");
+        include_once("../object/Pengguna.php");
 
         $database = new Database();
         $db = $database->getConnection();

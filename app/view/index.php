@@ -20,20 +20,22 @@
         </thead>
         <tbody>
             <?php
-            include_once("Pengguna.php"); # sisipkan class pengguna
+            include_once("../object/Pengguna.php"); # sisipkan class pengguna
 
             $database = new Database();
             $db = $database->getConnection();
 
             $pengguna = new Pengguna($db);
 
-            // Dapatkan semua pengguna
+            # Dapatkan semua pengguna
             $stmt = $pengguna->read();
             $num = $stmt->rowCount();
 
             if ($num > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    extract($row);
+                    $idpengguna = htmlspecialchars($row['idpengguna']);
+                    $nama       = htmlspecialchars($row['nama']);
+                    $surel      = htmlspecialchars($row['surel']);
 
                     # cara menulis echo pada banyak baris
                     echo <<< EOT

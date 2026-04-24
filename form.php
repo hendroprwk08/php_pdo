@@ -7,7 +7,7 @@
     <h1>FORM DENGAN PHP</h1>
     <?php
     #menangkap respon dari method="post"
-    if($_SERVER['REQUEST_METHOD'] == "POST"){ #jika ditekan submit
+    if($_SERVER['REQUEST_METHOD'] == "POST"): #jika ditekan submit
         #Tangkap variable
         $nama = $_POST['nama'];
         $alamat = $_POST['alamat'];
@@ -31,9 +31,11 @@
                 <p>Status: $status</p>
                 <p>Hobi: $hobi</p>
                 <p><a href='form.php'>Ulangi</a></p>";
-    }else{
-    ?>
-        <form method="POST" action="<?php $_SERVER['PHP_SELF']?>">
+    else:
+        $self = htmlspecialchars($_SERVER['PHP_SELF']);
+
+        echo <<< EOT
+        <form method="POST" action="{$self}">
             <p>Nama: <input type="text" name="nama"/></p>
             <p>Alamat: <textarea name="alamat"></textarea></p>
             <p>Lulus: 
@@ -58,6 +60,8 @@
             <input type="submit" name="submit" value="SIMPAN"/>
             <input type="reset" name="reset" value="ULANGI"/>
         </form>
-    <?php } ?>
+        EOT;
+    endif; 
+    ?>
 </body>
 </html>

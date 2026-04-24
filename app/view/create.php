@@ -11,16 +11,19 @@
     <div style="margin-bottom:30px"><a href="index.php">&larr; Kembali</a></div>
     <?php
     # menangkap respon dari method="post"
-    if ($_SERVER['REQUEST_METHOD'] == "POST") { # jika ditekan submit
-        include_once("../object/Pengguna.php");
+    if ($_SERVER['REQUEST_METHOD'] == "POST"): # jika ditekan submit
+        require_once "../db/Database.php";    
+        require_once "../obj/Pengguna.php";
 
         $database = new Database();
         $db = $database->getConnection();
 
+        if (!$db) die("<tr><td colspan='3'>Koneksi database bermasalah.</td></tr>");
+
         $pengguna = new Pengguna($db);
         $pengguna->nama = $_POST['nama'];
         $pengguna->surel = $_POST['surel'];
-        $pengguna->sandi =  password_hash($_POST['sandi'], PASSWORD_DEFAULT);
+        $pengguna->sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
 
         # simpan
         if ($pengguna->create()) {
@@ -28,8 +31,8 @@
         } else {
             echo "Gagal menyimpan data pengguna. <a href='create.php'>Ulangi</a> | <a href='index.php'>Lanjut</a>";
         }
-    } else {
-    ?>
+    else:
+        echo <<< EOT
         <form action="create.php" method="post">
             <p>
                 <label>Nama:</label>
@@ -49,7 +52,9 @@
                 <input type="submit" value="SIMPAN">
             </p>
         </form>
-    <?php } ?>
+        EOT;
+    endif; 
+    ?>
 </body>
 
 </html>

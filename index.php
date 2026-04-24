@@ -48,7 +48,7 @@ foreach ($buah as $x) {
 
 // menampilkan buah yang berada 
 // pada urutan pertama 
-echo "Buah favorit: " . $buah[0];
+echo "Buah favorit: ". $buah[0];
 
 echo "<h2>Objek</h2>";
 class Manusia {

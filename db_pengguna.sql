@@ -41,7 +41,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`idpengguna`, `nama`, `surel`, `sandi`, `dibuat_pada`, `diubah_pada`) VALUES
-(4, 'Hendro Purwoko', 'andi@gmail.com', '$2y$10$isIfX40uvJMUpjd4AY0sdOaNnpCVPNsUCgUp13TA2if', '2024-06-11 10:02:35', '2024-06-11 10:38:54');
+(4, 'Andi', 'andi@gmail.com', '$2y$10$isIfX40uvJMUpjd4AY0sdOaNnpCVPNsUCgUp13TA2if', '2024-06-11 10:02:35', '2024-06-11 10:38:54');
 
 --
 -- Indexes for dumped tables

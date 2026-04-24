@@ -20,19 +20,22 @@
         </thead>
         <tbody>
             <?php
-            include_once("../object/Pengguna.php"); # sisipkan class pengguna
+            require_once "../db/Database.php";
+            require_once "../obj/Pengguna.php"; # sisipkan class pengguna
 
             $database = new Database();
             $db = $database->getConnection();
-
+            
+            if (!$db) die("<tr><td colspan='3'>Koneksi database bermasalah.</td></tr>");
+            
             $pengguna = new Pengguna($db);
 
             # Dapatkan semua pengguna
             $stmt = $pengguna->read();
-            $num = $stmt->rowCount();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($num > 0) {
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if (count($rows) > 0) :
+                foreach ($rows as $row):
                     $idpengguna = htmlspecialchars($row['idpengguna']);
                     $nama       = htmlspecialchars($row['nama']);
                     $surel      = htmlspecialchars($row['surel']);
@@ -48,10 +51,10 @@
                        </td>
                     </tr>
                     EOT;
-                }
-            } else {
+                endforeach;
+            else:
                 echo "<tr><td colspan='3'>Tidak ada pengguna</td></tr>";
-            }
+            endif;
             ?>
         </tbody>
     </table>

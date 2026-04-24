@@ -10,14 +10,17 @@
 <body>
     <div style="margin-bottom:30px"><a href="index.php">&larr; Kembali</a></div>
     <?php
-    include_once("../object/Pengguna.php");
+    require_once "../db/Database.php";
+    require_once "../obj/Pengguna.php";
 
     $database = new Database();
     $db = $database->getConnection();
 
+    if (!$db) die("<tr><td colspan='3'>Koneksi database bermasalah.</td></tr>");
+            
     $pengguna = new Pengguna($db);
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") { # jika ditekan submit   
+    if ($_SERVER['REQUEST_METHOD'] == "POST"): # jika ditekan submit   
         $pengguna->idpengguna = $_POST['temp_id'];
         $pengguna->nama = $_POST['nama'];
         $pengguna->surel = $_POST['surel'];
@@ -29,18 +32,18 @@
         endif;
 
         # update
-        if ($pengguna->update()) {
+        if ($pengguna->update()):
             header('location: index.php'); # redirect
-        } else {
+        else :
             echo "Gagal menyimpan data pengguna. <a href='create.php'>Ulangi</a> | <a href='index.php'>Lanjut</a>";
-        }
-    } else {
+        endif;
+    else:
         $pengguna->idpengguna = $_GET['id'];        
         $stmt = $pengguna->show();
         $num = $stmt->rowCount();
 
-        if ($num > 0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($num > 0) :
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
                 extract($row);
 
                 echo <<< EOT
@@ -65,14 +68,14 @@
                 </p>
                 </form>
                 EOT;
-            }
-        } else {
+            endwhile;   
+        else:
             echo "Tidak ada pengguna yang ditemukan.";
-        }
+        endif;
 
     ?>
         
-    <?php } ?>
+    <?php endif; ?>
 </body>
 
 </html>
